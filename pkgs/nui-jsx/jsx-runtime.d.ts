@@ -43,6 +43,33 @@ type BaseElementProps = {
   backgroundFill?: string
 }
 
+type LayoutElementProps = {
+  direction?: 'column' | 'row' | 'column-reverse' | 'row-reverse'
+  wrap?: 'no-wrap' | 'wrap' | 'wrap-reverse'
+  gap?: number | `${number}%`
+  rowGap?: number | `${number}%`
+  columnGap?: number | `${number}%`
+
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+  alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
+  alignContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'stretch'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+
+  children?: Element | Element[]
+}
+
 namespace JSX {
   type Element = VNode<NWidget, NWidget>
 
@@ -53,34 +80,13 @@ namespace JSX {
   }
 
   interface IntrinsicElements {
-    layout: BaseElementProps & {
-      direction?: 'column' | 'row' | 'column-reverse' | 'row-reverse'
-      wrap?: 'no-wrap' | 'wrap' | 'wrap-reverse'
-      gap?: number | `${number}%`
-      rowGap?: number | `${number}%`
-      columnGap?: number | `${number}%`
-
-      justifyContent?:
-        | 'flex-start'
-        | 'flex-end'
-        | 'center'
-        | 'space-between'
-        | 'space-around'
-        | 'space-evenly'
-      alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
-      alignContent?:
-        | 'flex-start'
-        | 'flex-end'
-        | 'stretch'
-        | 'center'
-        | 'space-between'
-        | 'space-around'
-        | 'space-evenly'
-
-      children?: Element | Element[]
-    }
+    layout: BaseElementProps & LayoutElementProps
     text: BaseElementProps & {
       children?: (string | number | boolean | null | undefined)[] | string
     }
+    box: BaseElementProps &
+      LayoutElementProps & {
+        style?: 'single'
+      }
   }
 }

@@ -20,7 +20,9 @@ const Comp = () => {
       <text grow={1}> Hello World! {counter.value}</text>
       <text grow={1}> Hello World! {counter.value}</text>
       <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
+      <box style="single">
+        <text grow={1}> Hello World! {counter.value}</text>
+      </box>
       <text grow={1}> Hello World! {counter.value}</text>
       <text grow={1}> Hello World! {counter.value}</text>
       <text grow={1}> Hello World! {counter.value}</text>

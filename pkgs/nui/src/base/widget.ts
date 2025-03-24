@@ -22,11 +22,15 @@ export class NWidget {
   frame: [x: number, y: number, w: number, h: number] = [0, 0, 0, 0]
   // without padding
   bound: [x: number, y: number, w: number, h: number] = [0, 0, 0, 0]
-  props: NWidgetProp = {}
+  _props: NWidgetProp = {}
 
   constructor() {
     this.node = Yoga.Node.create()
     yogaCleaner.register(this, this.node)
+  }
+
+  get props() {
+    return this._props
   }
 
   patchProp(key: string, value: unknown) {

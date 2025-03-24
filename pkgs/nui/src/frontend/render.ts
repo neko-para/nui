@@ -7,6 +7,7 @@ import {
 } from '@vue/runtime-core'
 import { FlexDirection } from 'yoga-layout'
 
+import { NBox } from '../base/box'
 import { NLayout } from '../base/layout'
 import { screen } from '../base/screen'
 import { NText } from '../base/text'
@@ -42,6 +43,8 @@ const options: RendererOptions<NWidget, NWidget> = {
         return new NText()
       case 'layout':
         return new NLayout()
+      case 'box':
+        return new NBox()
     }
     return new NWidget()
   },
