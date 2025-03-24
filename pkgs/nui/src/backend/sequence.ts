@@ -25,6 +25,14 @@ export const sequence = {
     return key.substring(7) as PresetColor
   },
 
+  switchBuffer(alter = true) {
+    if (alter) {
+      process.stdout.write('\x1b[?1049h')
+    } else {
+      process.stdout.write('\x1b[?1049l')
+    }
+  },
+
   clear() {
     process.stdout.write(`\x1b[2J`)
   },
