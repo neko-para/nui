@@ -18,7 +18,10 @@ export class NWidget {
   parent: NWidget | null = null
   childs: NWidget[] = []
 
+  // with padding
   frame: [x: number, y: number, w: number, h: number] = [0, 0, 0, 0]
+  // without padding
+  bound: [x: number, y: number, w: number, h: number] = [0, 0, 0, 0]
   props: NWidgetProp = {}
 
   constructor() {
@@ -350,6 +353,18 @@ export class NWidget {
     const { left, top, width, height } = this.node.getComputedLayout()
     const [x, y] = this.parent?.frame ?? [0, 0]
     this.frame = [left + x, top + y, width, height]
+
+    const pleft = this.node.getComputedPadding(Edge.Left)
+    const pright = this.node.getComputedPadding(Edge.Right)
+    const ptop = this.node.getComputedPadding(Edge.Top)
+    const pbottom = this.node.getComputedPadding(Edge.Bottom)
+
+    this.bound = [
+      this.frame[0] + pleft,
+      this.frame[1] + ptop,
+      this.frame[2] - pleft - pright,
+      this.frame[3] - ptop - pbottom
+    ]
 
     for (const child of this.childs) {
       child.layout()

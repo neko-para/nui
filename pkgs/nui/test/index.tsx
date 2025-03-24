@@ -11,7 +11,7 @@ setInterval(() => {
 const Comp = () => {
   return (
     <layout rowGap={2} gap={counter.value} direction="row" wrap="wrap" backgroundFill="_">
-      <text grow={1} backgroundFill=" ">
+      <text grow={1} backgroundFill=" " paddingLeft={5} paddingTop={1}>
         {' '}
         Hello World! {counter.value}
       </text>

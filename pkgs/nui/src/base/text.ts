@@ -107,20 +107,20 @@ export class NText extends NWidget {
     const rows = this.text.split('\n')
     let row: string | undefined = undefined
 
-    for (let y = 0; y < this.frame[3]; y++) {
+    for (let y = 0; y < this.bound[3]; y++) {
       if (row === undefined) {
         row = rows.shift()
       }
       if (row === undefined) {
         break
       }
-      const sect = row.substring(0, this.frame[2])
-      row = row.substring(this.frame[2])
+      const sect = row.substring(0, this.bound[2])
+      row = row.substring(this.bound[2])
       if (row.length === 0) {
         row = undefined
       }
 
-      sequence.move(this.frame[1] + y, this.frame[0])
+      sequence.move(this.bound[1] + y, this.bound[0])
       process.stdout.write(sect)
     }
   }
