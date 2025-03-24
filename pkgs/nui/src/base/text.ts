@@ -103,6 +103,11 @@ export class NText extends NWidget {
 
   draw() {
     NWidget.prototype.draw.call(this)
+    sequence.resetColor()
+
+    if (!this.text) {
+      return
+    }
 
     const rows = this.text.split('\n')
     let row: string | undefined = undefined

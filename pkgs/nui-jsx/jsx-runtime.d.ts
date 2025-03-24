@@ -1,6 +1,6 @@
 import type { Component, DefineSetupFnComponent, VNode } from '@vue/runtime-core'
 
-import type { NWidget } from '@nekosu/nui'
+import type { NBoxProp, NWidget, NWidgetProp } from '@nekosu/nui'
 
 export function jsxs(type: any, props?: any, key?: string): VNode<NWidget, NWidget>
 export function jsx(type: any, props?: any, key?: string): VNode<NWidget, NWidget>
@@ -39,9 +39,7 @@ type BaseElementProps = {
   shrink?: number
 
   aspectRatio?: number
-
-  backgroundFill?: string
-}
+} & NWidgetProp
 
 type LayoutElementProps = {
   direction?: 'column' | 'row' | 'column-reverse' | 'row-reverse'
@@ -84,9 +82,6 @@ namespace JSX {
     text: BaseElementProps & {
       children?: (string | number | boolean | null | undefined)[] | string
     }
-    box: BaseElementProps &
-      LayoutElementProps & {
-        style?: 'single'
-      }
+    box: BaseElementProps & LayoutElementProps & NBoxProp
   }
 }

@@ -1,6 +1,7 @@
 import Yoga, { Align, Display, Edge, type Node, PositionType } from 'yoga-layout'
 
 import { sequence } from '..'
+import { BrightPresetColor, PresetColor } from '../backend/sequence'
 import { screen } from './screen'
 import { checkNumberPercUndefined } from './validate'
 
@@ -10,6 +11,7 @@ const yogaCleaner = new FinalizationRegistry((node: Node) => {
 
 export type NWidgetProp = {
   backgroundFill?: string
+  backgroundColor?: PresetColor | BrightPresetColor
 }
 
 export class NWidget {
@@ -36,7 +38,7 @@ export class NWidget {
   patchProp(key: string, value: unknown) {
     switch (key) {
       case 'display':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -186,7 +188,7 @@ export class NWidget {
         break
 
       case 'position':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -246,7 +248,7 @@ export class NWidget {
         break
 
       case 'alignSelf':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -282,21 +284,21 @@ export class NWidget {
         break
 
       case 'grow':
-        if (typeof value !== 'number' && typeof value !== 'undefined') {
+        if (typeof value !== 'number' && value !== undefined) {
           return false
         }
         this.node.setFlexGrow(value)
         break
 
       case 'shrink':
-        if (typeof value !== 'number' && typeof value !== 'undefined') {
+        if (typeof value !== 'number' && value !== undefined) {
           return false
         }
         this.node.setFlexShrink(value)
         break
 
       case 'aspectRatio':
-        if (typeof value !== 'number' && typeof value !== 'undefined') {
+        if (typeof value !== 'number' && value !== undefined) {
           return false
         }
         this.node.setAspectRatio(value)
@@ -309,6 +311,14 @@ export class NWidget {
           break
         }
         return false
+
+      case 'backgroundColor':
+        if (!(value === undefined) && !(typeof value === 'string' && sequence.isPreset(value))) {
+          return false
+        }
+        this.props.backgroundColor = value
+        screen?.scheduleRender()
+        break
 
       default:
         return false
@@ -376,8 +386,13 @@ export class NWidget {
   }
 
   draw() {
+    sequence.resetColor()
+
     const fill = this.props.backgroundFill
     if (fill) {
+      if (this.props.backgroundColor) {
+        sequence.presetBackground(this.props.backgroundColor)
+      }
       for (let y = 0; y < this.frame[3]; y++) {
         sequence.move(y + this.frame[1], this.frame[0])
         process.stdout.write(fill.repeat(this.frame[2]))

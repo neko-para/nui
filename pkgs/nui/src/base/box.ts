@@ -6,7 +6,15 @@ import { screen } from './screen'
 import { NWidget, NWidgetProp } from './widget'
 
 export type NBoxProp = NWidgetProp & {
-  style?: 'single'
+  style?:
+    | 'single'
+    | 'double'
+    | 'round'
+    | 'bold'
+    | 'singleDouble'
+    | 'doubleSingle'
+    | 'classic'
+    | 'arrow'
 }
 
 export class NBox extends NWidget {
@@ -25,15 +33,20 @@ export class NBox extends NWidget {
   patchProp(key: string, value: unknown) {
     switch (key) {
       case 'style':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
           case undefined:
-            this.props.style = undefined
-            break
           case 'single':
-            this.props.style = 'single'
+          case 'double':
+          case 'round':
+          case 'bold':
+          case 'singleDouble':
+          case 'doubleSingle':
+          case 'classic':
+          case 'arrow':
+            this.props.style = value
             break
         }
 
@@ -48,9 +61,13 @@ export class NBox extends NWidget {
   }
 
   draw() {
+    NWidget.prototype.draw.call(this)
+    sequence.resetColor()
+
     if (!this.props.style) {
       return
     }
+
     const style = cliBoxes[this.props.style]
 
     sequence.move(this.frame[1], this.frame[0])

@@ -1,6 +1,5 @@
 import { Align, FlexDirection, Gutter, Justify, Wrap } from 'yoga-layout'
 
-import { screen } from './screen'
 import { checkNumberPercUndefined } from './validate'
 import { NWidget } from './widget'
 
@@ -12,7 +11,7 @@ export class NLayout extends NWidget {
   patchProp(key: string, value: unknown) {
     switch (key) {
       case 'direction':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -35,7 +34,7 @@ export class NLayout extends NWidget {
         break
 
       case 'wrap':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -76,7 +75,7 @@ export class NLayout extends NWidget {
         break
 
       case 'justifyContent':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -105,7 +104,7 @@ export class NLayout extends NWidget {
         break
 
       case 'alignItems':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
@@ -131,7 +130,7 @@ export class NLayout extends NWidget {
         break
 
       case 'alignContent':
-        if (typeof value !== 'string' && typeof value !== 'undefined') {
+        if (typeof value !== 'string' && value !== undefined) {
           return false
         }
         switch (value) {
