@@ -5,9 +5,12 @@ import {
   VNodeProps,
   createRenderer
 } from '@vue/runtime-core'
+import { FlexDirection } from 'yoga-layout'
 
-import { NText } from './text'
-import { NWidget } from './widget'
+import { NLayout } from '../base/layout'
+import { screen } from '../base/screen'
+import { NText } from '../base/text'
+import { NWidget } from '../base/widget'
 
 const options: RendererOptions<NWidget, NWidget> = {
   patchProp: function (
@@ -18,7 +21,9 @@ const options: RendererOptions<NWidget, NWidget> = {
     namespace?: ElementNamespace,
     parentComponent?: ComponentInternalInstance | null
   ): void {
-    throw new Error('Function not implemented.')
+    if (el.patchProp(key, nextValue)) {
+      screen?.scheduleLayout()
+    }
   },
   insert: function (el: NWidget, parent: NWidget, anchor?: NWidget | null | undefined): void {
     el.insert(parent, anchor)
@@ -32,22 +37,24 @@ const options: RendererOptions<NWidget, NWidget> = {
     isCustomizedBuiltIn?: string,
     vnodeProps?: (VNodeProps & { [key: string]: any }) | null
   ): NWidget {
+    switch (type) {
+      case 'text':
+        return new NText()
+      case 'layout':
+        return new NLayout()
+    }
     return new NWidget()
   },
   createText: function (text: string): NWidget {
-    return new NText(text)
+    return new NWidget()
   },
   createComment: function (text: string): NWidget {
-    return new NText(text)
+    return new NWidget()
   },
-  setText: function (node: NWidget, text: string): void {
-    if (node instanceof NText) {
-      ;(node as NText).text = text
-    }
-  },
+  setText: function (node: NWidget, text: string): void {},
   setElementText: function (node: NWidget, text: string): void {
     if (node instanceof NText) {
-      ;(node as NText).text = text
+      node.updateText(text)
     }
   },
   parentNode: function (node: NWidget): NWidget | null {

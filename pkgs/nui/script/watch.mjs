@@ -1,7 +1,7 @@
 import { context } from 'esbuild'
 
 context({
-  entryPoints: ['src/index.ts'],
+  entryPoints: ['test/index.tsx'],
   platform: 'node',
   bundle: true,
   sourcemap: true,

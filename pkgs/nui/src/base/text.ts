@@ -1,13 +1,16 @@
 import { MeasureMode } from 'yoga-layout'
 
+import { sequence } from '../backend/sequence'
+import { screen } from './screen'
 import { NWidget } from './widget'
 
 export class NText extends NWidget {
-  text: string
+  text: string = ''
 
-  constructor(text: string) {
+  constructor(str?: string) {
     super()
-    this.text = text
+
+    this.text = str ?? ''
 
     this.node.setMeasureFunc((width, widthMode, height, heightMode) => {
       const rows = this.text.split('\n').map(x => x.length)
@@ -91,7 +94,16 @@ export class NText extends NWidget {
     })
   }
 
+  updateText(str: string) {
+    this.text = str
+
+    this.node.markDirty()
+    screen?.scheduleLayout()
+  }
+
   draw() {
+    NWidget.prototype.draw.call(this)
+
     const rows = this.text.split('\n')
     let row: string | undefined = undefined
 
@@ -108,7 +120,7 @@ export class NText extends NWidget {
         row = undefined
       }
 
-      process.stdout.write(`\x1b[${1 + this.frame[1] + y};${1 + this.frame[0]}H`)
+      sequence.move(this.frame[1] + y, this.frame[0])
       process.stdout.write(sect)
     }
   }

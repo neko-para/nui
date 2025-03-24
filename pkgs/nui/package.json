@@ -1,15 +1,17 @@
 {
   "name": "@nekosu/nui",
+  "main": "src/index.ts",
   "type": "module",
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.11",
-    "@vue/runtime-core": "^3.5.13",
     "@vue/tsconfig": "^0.7.0",
     "esbuild": "^0.25.1",
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@nekosu/nui-jsx": "workspace:*",
+    "@vue/runtime-core": "^3.5.13",
     "yoga-layout": "^3.2.1"
   }
 }

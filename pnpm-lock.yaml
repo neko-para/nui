@@ -14,6 +14,12 @@ importers:
 
   pkgs/nui:
     dependencies:
+      '@nekosu/nui-jsx':
+        specifier: workspace:*
+        version: link:../nui-jsx
+      '@vue/runtime-core':
+        specifier: ^3.5.13
+        version: 3.5.13
       yoga-layout:
         specifier: ^3.2.1
         version: 3.2.1
@@ -24,9 +30,6 @@ importers:
       '@types/node':
         specifier: ^22.13.11
         version: 22.13.11
-      '@vue/runtime-core':
-        specifier: ^3.5.13
-        version: 3.5.13
       '@vue/tsconfig':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.8.2)
@@ -36,6 +39,19 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+
+  pkgs/nui-jsx:
+    dependencies:
+      '@nekosu/nui':
+        specifier: 'workspace: *'
+        version: link:../nui
+      '@vue/runtime-core':
+        specifier: ^3.5.13
+        version: 3.5.13
+    devDependencies:
+      '@types/node':
+        specifier: ^22.13.11
+        version: 22.13.11
 
 packages:
 

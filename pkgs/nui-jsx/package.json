@@ -1,0 +1,19 @@
+{
+  "name": "@nekosu/nui-jsx",
+  "type": "module",
+  "exports": {
+    "./jsx-runtime": {
+      "import": {
+        "types": "./jsx-runtime.d.ts",
+        "default": "./jsx-runtime.js"
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11"
+  },
+  "dependencies": {
+    "@nekosu/nui": "workspace: *",
+    "@vue/runtime-core": "^3.5.13"
+  }
+}
