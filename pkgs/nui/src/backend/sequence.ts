@@ -33,30 +33,43 @@ export const sequence = {
     }
   },
 
+  clearSeq() {
+    return this.moveSeq(1, 1) + `\x1b[J`
+  },
   clear() {
-    process.stdout.write(`\x1b[2J`)
+    process.stdout.write(this.clearSeq())
+  },
+  moveSeq(row: number, col: number) {
+    return `\x1b[${row + 1};${col + 1}H`
   },
   move(row: number, col: number) {
-    process.stdout.write(`\x1b[${row + 1};${col + 1}H`)
+    process.stdout.write(this.moveSeq(row, col))
   },
 
+  resetColorSeq() {
+    return `\x1b[0m`
+  },
   resetColor() {
-    process.stdout.write(`\x1b[0m`)
+    process.stdout.write(this.resetColorSeq())
+  },
+  presetForegroundSeq(color: PresetColor | BrightPresetColor) {
+    if (this.isBright(color)) {
+      return `\x1b[${PresetColor[this.trimBrightPreset(color)] + BrightAlter}m`
+    } else {
+      return `\x1b[${PresetColor[color]}m`
+    }
   },
   presetForeground(color: PresetColor | BrightPresetColor) {
+    process.stdout.write(this.presetForegroundSeq(color))
+  },
+  presetBackgroundSeq(color: PresetColor | BrightPresetColor) {
     if (this.isBright(color)) {
-      process.stdout.write(`\x1b[${PresetColor[this.trimBrightPreset(color)] + BrightAlter}m`)
+      return `\x1b[${PresetColor[this.trimBrightPreset(color)] + BackgroundAlter + BrightAlter}m`
     } else {
-      process.stdout.write(`\x1b[${PresetColor[color]}m`)
+      return `\x1b[${PresetColor[color] + BackgroundAlter}m`
     }
   },
   presetBackground(color: PresetColor | BrightPresetColor) {
-    if (this.isBright(color)) {
-      process.stdout.write(
-        `\x1b[${PresetColor[this.trimBrightPreset(color)] + BackgroundAlter + BrightAlter}m`
-      )
-    } else {
-      process.stdout.write(`\x1b[${PresetColor[color] + BackgroundAlter}m`)
-    }
+    process.stdout.write(this.presetBackgroundSeq(color))
   }
 }

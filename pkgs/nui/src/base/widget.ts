@@ -1,7 +1,7 @@
 import Yoga, { Align, Display, Edge, type Node, PositionType } from 'yoga-layout'
 
-import { sequence } from '..'
-import { BrightPresetColor, PresetColor } from '../backend/sequence'
+import { Compose } from '../backend/compose'
+import { BrightPresetColor, PresetColor, sequence } from '../backend/sequence'
 import { screen } from './screen'
 import { checkNumberPercUndefined } from './validate'
 
@@ -385,30 +385,24 @@ export class NWidget {
     }
   }
 
-  draw() {
-    sequence.resetColor()
-
-    const fill = this.props.backgroundFill
-    if (fill) {
-      if (this.props.backgroundColor) {
-        sequence.presetBackground(this.props.backgroundColor)
-      }
-      for (let y = 0; y < this.frame[3]; y++) {
-        sequence.move(y + this.frame[1], this.frame[0])
-        process.stdout.write(fill.repeat(this.frame[2]))
-      }
+  draw(compose: Compose) {
+    if (this.props.backgroundFill) {
+      compose.fillText(...this.frame, this.props.backgroundFill)
+    }
+    if (this.props.backgroundColor) {
+      compose.rect(...this.frame, this.props.backgroundColor)
     }
   }
 
-  render() {
+  render(compose: Compose) {
     if (this.node.getDisplay() === Display.None) {
       return
     }
 
-    this.draw()
+    this.draw(compose)
 
     for (const child of this.childs) {
-      child.render()
+      child.render(compose)
     }
   }
 }

@@ -10,24 +10,23 @@ setInterval(() => {
 
 const Comp = () => {
   return (
-    <layout rowGap={2} gap={counter.value} direction="row" wrap="wrap" backgroundFill="_">
-      <text grow={1} backgroundFill=" " paddingLeft={5} paddingTop={1}>
-        {' '}
-        Hello World! {counter.value}
-      </text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <box style="arrow" backgroundColor="red" backgroundFill=" ">
-        <text grow={1}> Hello World! {counter.value}</text>
-      </box>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
-      <text grow={1}> Hello World! {counter.value}</text>
+    <layout
+      rowGap={2}
+      gap={counter.value}
+      direction="row"
+      wrap="wrap"
+      backgroundFill=" "
+      backgroundColor="bright-white"
+    >
+      {Array.from({ length: 10 }, (_, idx) => {
+        return (
+          <box style="single" backgroundFill=" " borderColor="bright-magenta">
+            <text grow={1}>
+              Item {idx} {counter.value}
+            </text>
+          </box>
+        )
+      })}
     </layout>
   )
 }

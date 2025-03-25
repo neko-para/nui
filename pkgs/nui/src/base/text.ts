@@ -1,6 +1,6 @@
 import { MeasureMode } from 'yoga-layout'
 
-import { sequence } from '../backend/sequence'
+import { Compose } from '../backend/compose'
 import { screen } from './screen'
 import { NWidget } from './widget'
 
@@ -101,9 +101,8 @@ export class NText extends NWidget {
     screen?.scheduleLayout()
   }
 
-  draw() {
-    NWidget.prototype.draw.call(this)
-    sequence.resetColor()
+  draw(compose: Compose) {
+    NWidget.prototype.draw.call(this, compose)
 
     if (!this.text) {
       return
@@ -125,8 +124,7 @@ export class NText extends NWidget {
         row = undefined
       }
 
-      sequence.move(this.bound[1] + y, this.bound[0])
-      process.stdout.write(sect)
+      compose.text(this.bound[0], this.bound[1] + y, sect)
     }
   }
 }

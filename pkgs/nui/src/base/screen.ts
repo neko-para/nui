@@ -1,5 +1,6 @@
 import Yoga, { type Node } from 'yoga-layout'
 
+import { Compose } from '../backend/compose'
 import { NWidget } from './widget'
 
 export let screen: NScreen | null = null
@@ -39,15 +40,6 @@ export class NScreen extends NWidget {
     this.scheduleRender()
   }
 
-  render() {
-    this.needsRender = false
-    NWidget.prototype.render.call(this)
-
-    if (this.needsRender) {
-      this.scheduleRender()
-    }
-  }
-
   scheduleLayout() {
     if (!this.needsLayout) {
       this.needsLayout = true
@@ -61,7 +53,14 @@ export class NScreen extends NWidget {
     if (!this.needsRender) {
       this.needsRender = true
       setImmediate(() => {
-        this.render()
+        const compose = new Compose()
+        this.needsRender = false
+        this.render(compose)
+        compose.render()
+
+        if (this.needsRender) {
+          this.scheduleRender()
+        }
       })
     }
   }
