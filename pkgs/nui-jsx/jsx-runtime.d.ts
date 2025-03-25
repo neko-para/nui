@@ -68,10 +68,12 @@ type LayoutElementProps = {
   children?: Element | Element[]
 }
 
+type TextPrim = string | number | boolean | null | undefined
+
 namespace JSX {
   type Element = VNode<NWidget, NWidget>
 
-  type ElementType = keyof IntrinsicElements | (() => Element)
+  type ElementType = keyof IntrinsicElements | (() => Element) | Component
 
   interface ElementChildrenAttribute {
     children: {}
@@ -80,7 +82,7 @@ namespace JSX {
   interface IntrinsicElements {
     layout: BaseElementProps & LayoutElementProps
     text: BaseElementProps & {
-      children?: (string | number | boolean | null | undefined)[] | string
+      children?: TextPrim | TextPrim[]
     }
     box: BaseElementProps & LayoutElementProps & NBoxProp
   }

@@ -1,4 +1,4 @@
-import { ref } from '@vue/runtime-core'
+import { defineComponent, ref } from '@vue/runtime-core'
 
 import { NScreen, createApp, sequence } from '..'
 
@@ -7,6 +7,12 @@ const counter = ref(1)
 setInterval(() => {
   counter.value += 1
 }, 1000)
+
+const VueComp = defineComponent(() => {
+  return () => {
+    return <text>{counter.value}</text>
+  }
+})
 
 const Comp = () => {
   return (
@@ -24,6 +30,7 @@ const Comp = () => {
             <text grow={1}>
               Item {idx} {counter.value}
             </text>
+            <VueComp></VueComp>
           </box>
         )
       })}
