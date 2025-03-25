@@ -1,9 +1,9 @@
 import Yoga, { Align, Display, Edge, type Node, PositionType } from 'yoga-layout'
 
 import { Compose } from '../backend/compose'
-import { BrightPresetColor, PresetColor, sequence } from '../backend/sequence'
+import { type KnownColor, sequence } from '../backend/sequence'
 import { screen } from './screen'
-import { checkNumberPercUndefined } from './validate'
+import { checkColorNullUndefined, checkNumberPercUndefined } from './validate'
 
 const yogaCleaner = new FinalizationRegistry((node: Node) => {
   node.free()
@@ -11,7 +11,7 @@ const yogaCleaner = new FinalizationRegistry((node: Node) => {
 
 export type NWidgetProp = {
   backgroundFill?: string
-  backgroundColor?: PresetColor | BrightPresetColor
+  backgroundColor?: KnownColor | null
 }
 
 export class NWidget {
@@ -313,7 +313,7 @@ export class NWidget {
         return false
 
       case 'backgroundColor':
-        if (!(value === undefined) && !(typeof value === 'string' && sequence.isPreset(value))) {
+        if (!checkColorNullUndefined(value)) {
           return false
         }
         this.props.backgroundColor = value

@@ -1,6 +1,6 @@
 import type { Component, DefineSetupFnComponent, VNode } from '@vue/runtime-core'
 
-import type { NBoxProp, NWidget, NWidgetProp } from '@nekosu/nui'
+import type { NBoxProp, NTextProp, NWidget, NWidgetProp } from '@nekosu/nui'
 
 export function jsxs(type: any, props?: any, key?: string): VNode<NWidget, NWidget>
 export function jsx(type: any, props?: any, key?: string): VNode<NWidget, NWidget>
@@ -83,7 +83,7 @@ namespace JSX {
     layout: BaseElementProps & LayoutElementProps
     text: BaseElementProps & {
       children?: TextPrim | TextPrim[]
-    }
+    } & NTextProp
     box: BaseElementProps & LayoutElementProps & NBoxProp
   }
 }

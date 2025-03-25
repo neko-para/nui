@@ -27,7 +27,7 @@ const Comp = () => {
       {Array.from({ length: 10 }, (_, idx) => {
         return (
           <box style="single" backgroundFill=" " borderColor="bright-magenta">
-            <text grow={1}>
+            <text grow={1} color={'blue'}>
               Item {idx} {counter.value}
             </text>
             <VueComp></VueComp>

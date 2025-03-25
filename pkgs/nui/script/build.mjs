@@ -6,5 +6,6 @@ build({
   bundle: true,
   sourcemap: true,
   outdir: 'dist',
-  format: 'esm'
+  format: 'esm',
+  minify: true
 })

@@ -1,5 +1,3 @@
-import Yoga, { type Node } from 'yoga-layout'
-
 import { Compose } from '../backend/compose'
 import { NWidget } from './widget'
 

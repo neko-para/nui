@@ -1,8 +1,14 @@
 import { MeasureMode } from 'yoga-layout'
 
 import { Compose } from '../backend/compose'
+import { type KnownColor, sequence } from '../backend/sequence'
 import { screen } from './screen'
-import { NWidget } from './widget'
+import { checkColorNullUndefined } from './validate'
+import { NWidget, type NWidgetProp } from './widget'
+
+export type NTextProp = NWidgetProp & {
+  color?: KnownColor | null
+}
 
 export class NText extends NWidget {
   text: string = ''
@@ -94,6 +100,27 @@ export class NText extends NWidget {
     })
   }
 
+  get props() {
+    return this._props as NTextProp
+  }
+
+  patchProp(key: string, value: unknown) {
+    switch (key) {
+      case 'color':
+        if (!checkColorNullUndefined(value)) {
+          return false
+        }
+        this.props.color = value
+        screen?.scheduleRender()
+        break
+
+      default:
+        return NWidget.prototype.patchProp.call(this, key, value)
+    }
+
+    return true
+  }
+
   updateText(str: string) {
     this.text = str
 
@@ -124,7 +151,7 @@ export class NText extends NWidget {
         row = undefined
       }
 
-      compose.text(this.bound[0], this.bound[1] + y, sect)
+      compose.text(this.bound[0], this.bound[1] + y, sect, this.props.color)
     }
   }
 }

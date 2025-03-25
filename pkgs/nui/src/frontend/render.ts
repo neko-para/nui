@@ -1,11 +1,10 @@
 import {
-  ComponentInternalInstance,
-  ElementNamespace,
+  type ComponentInternalInstance,
+  type ElementNamespace,
   type RendererOptions,
-  VNodeProps,
+  type VNodeProps,
   createRenderer
 } from '@vue/runtime-core'
-import { FlexDirection } from 'yoga-layout'
 
 import { NBox } from '../base/box'
 import { NLayout } from '../base/layout'

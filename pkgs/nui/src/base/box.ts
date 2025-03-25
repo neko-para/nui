@@ -2,12 +2,13 @@ import cliBoxes from 'cli-boxes'
 import { Edge } from 'yoga-layout'
 
 import { Compose } from '../backend/compose'
-import { BrightPresetColor, PresetColor, sequence } from '../backend/sequence'
+import { type KnownColor, sequence } from '../backend/sequence'
 import { screen } from './screen'
-import { NWidget, NWidgetProp } from './widget'
+import { checkColorNullUndefined } from './validate'
+import { NWidget, type NWidgetProp } from './widget'
 
 export type NBoxProp = NWidgetProp & {
-  borderColor?: PresetColor | BrightPresetColor
+  borderColor?: KnownColor | null
   style?:
     | 'single'
     | 'double'
@@ -35,7 +36,7 @@ export class NBox extends NWidget {
   patchProp(key: string, value: unknown) {
     switch (key) {
       case 'borderColor':
-        if (!(value === undefined) && !(typeof value === 'string' && sequence.isPreset(value))) {
+        if (!checkColorNullUndefined(value)) {
           return false
         }
         this.props.borderColor = value

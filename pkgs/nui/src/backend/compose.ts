@@ -1,6 +1,4 @@
-import { BrightPresetColor, PresetColor, sequence } from './sequence'
-
-type Color = PresetColor | BrightPresetColor
+import { type KnownColor, sequence } from './sequence'
 
 type RenderAction =
   | {
@@ -8,19 +6,19 @@ type RenderAction =
       pos: [row: number, col: number]
       count: number
       text: string
-      color?: Color | null
+      color?: KnownColor | null
     }
   | {
       action: 'fill'
       pos: [row: number, col: number]
       count: number
-      color: Color | null
+      color: KnownColor | null
     }
 
 type Attr = {
   ch?: string
-  fg?: Color
-  bg?: Color
+  fg?: KnownColor
+  bg?: KnownColor
 }
 
 export class Compose {
@@ -30,7 +28,7 @@ export class Compose {
     this.actions.push(...acts)
   }
 
-  text(col: number, row: number, text: string, color?: Color | null) {
+  text(col: number, row: number, text: string, color?: KnownColor | null) {
     this.commit({
       action: 'text',
       pos: [row, col],
@@ -46,7 +44,7 @@ export class Compose {
     width: number,
     height: number,
     text: string,
-    color?: Color | null
+    color?: KnownColor | null
   ) {
     this.commit(
       ...Array.from(
@@ -63,7 +61,7 @@ export class Compose {
     )
   }
 
-  rect(col: number, row: number, width: number, height: number, color: Color | null) {
+  rect(col: number, row: number, width: number, height: number, color: KnownColor | null) {
     this.commit(
       ...Array.from(
         { length: height },

@@ -14,7 +14,13 @@ export const BrightAlter = 60
 export type PresetColor = keyof typeof PresetColor
 export type BrightPresetColor<K = PresetColor> = K extends string ? `bright-${K}` : never
 
+export type KnownColor = PresetColor | BrightPresetColor
+
 export const sequence = {
+  isColor(key: unknown): key is KnownColor {
+    return typeof key === 'string' && this.isPreset(key)
+  },
+
   isPreset(key: string): key is PresetColor | BrightPresetColor {
     return (key.startsWith('bright-') ? key.substring(7) : key) in PresetColor
   },
