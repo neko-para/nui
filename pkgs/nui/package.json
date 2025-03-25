@@ -1,18 +1,18 @@
 {
   "name": "@nekosu/nui",
-  "main": "src/index.ts",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/src/index.d.ts",
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.11",
-    "@vue/tsconfig": "^0.7.0",
     "esbuild": "^0.25.1",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "cli-boxes": "^4.0.1",
+    "yoga-layout": "^3.2.1"
   },
   "dependencies": {
     "@nekosu/nui-jsx": "workspace:*",
-    "@vue/runtime-core": "^3.5.13",
-    "cli-boxes": "^4.0.1",
-    "yoga-layout": "^3.2.1"
+    "@vue/runtime-core": "^3.5.13"
   }
 }

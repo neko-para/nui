@@ -1,6 +1,4 @@
-import { defineComponent, ref } from '@vue/runtime-core'
-
-import { NScreen, createApp, sequence } from '..'
+import { NScreen, createApp, defineComponent, ref, sequence } from '@nekosu/nui'
 
 const counter = ref(1)
 

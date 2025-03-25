@@ -1,0 +1,4 @@
+{
+  "extends": "@nekosu/nui-tsconfig/tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

@@ -70,7 +70,7 @@ type LayoutElementProps = {
 
 type TextPrim = string | number | boolean | null | undefined
 
-namespace JSX {
+declare namespace JSX {
   type Element = VNode<NWidget, NWidget>
 
   type ElementType = keyof IntrinsicElements | (() => Element) | Component

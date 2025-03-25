@@ -1,0 +1,6 @@
+{
+  "name": "@nekosu/nui-tsconfig",
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.0"
+  }
+}

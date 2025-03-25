@@ -9,3 +9,5 @@ export type { NWidgetProp } from './base/widget'
 
 export { createApp, render } from './frontend/render'
 export { sequence } from './backend/sequence'
+
+export * from '@vue/runtime-core'

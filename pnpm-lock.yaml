@@ -20,12 +20,6 @@ importers:
       '@vue/runtime-core':
         specifier: ^3.5.13
         version: 3.5.13
-      cli-boxes:
-        specifier: ^4.0.1
-        version: 4.0.1
-      yoga-layout:
-        specifier: ^3.2.1
-        version: 3.2.1
     devDependencies:
       '@tsconfig/node22':
         specifier: ^22.0.0
@@ -33,9 +27,37 @@ importers:
       '@types/node':
         specifier: ^22.13.11
         version: 22.13.11
-      '@vue/tsconfig':
-        specifier: ^0.7.0
-        version: 0.7.0(typescript@5.8.2)
+      cli-boxes:
+        specifier: ^4.0.1
+        version: 4.0.1
+      esbuild:
+        specifier: ^0.25.1
+        version: 0.25.1
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+      yoga-layout:
+        specifier: ^3.2.1
+        version: 3.2.1
+
+  pkgs/nui-demo:
+    dependencies:
+      '@nekosu/nui':
+        specifier: workspace:*
+        version: link:../nui
+      '@nekosu/nui-jsx':
+        specifier: workspace:*
+        version: link:../nui-jsx
+      '@nekosu/nui-tsconfig':
+        specifier: workspace:*
+        version: link:../nui-tsconfig
+    devDependencies:
+      '@tsconfig/node22':
+        specifier: ^22.0.0
+        version: 22.0.0
+      '@types/node':
+        specifier: ^22.13.11
+        version: 22.13.11
       esbuild:
         specifier: ^0.25.1
         version: 0.25.1
@@ -55,6 +77,12 @@ importers:
       '@types/node':
         specifier: ^22.13.11
         version: 22.13.11
+
+  pkgs/nui-tsconfig:
+    devDependencies:
+      '@tsconfig/node22':
+        specifier: ^22.0.0
+        version: 22.0.0
 
 packages:
 
@@ -290,17 +318,6 @@ packages:
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
 
-  '@vue/tsconfig@0.7.0':
-    resolution: {integrity: sha512-ku2uNz5MaZ9IerPPUyOHzyjhXoX2kVJaVf7hL315DC17vS6IiZRmmCPfggNbU16QTvM80+uYYy3eYJB59WCtvg==}
-    peerDependencies:
-      typescript: 5.x
-      vue: ^3.4.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-      vue:
-        optional: true
-
   cli-boxes@4.0.1:
     resolution: {integrity: sha512-5IOn+jcCEHEraYolBPs/sT4BxYCe2nHg374OPiItB1O96KZFseS2gthU4twyYzeDcFew4DaUM/xwc5BQf08JJw==}
     engines: {node: '>=18.20 <19 || >=20.10'}
@@ -526,10 +543,6 @@ snapshots:
       '@vue/shared': 3.5.13
 
   '@vue/shared@3.5.13': {}
-
-  '@vue/tsconfig@0.7.0(typescript@5.8.2)':
-    optionalDependencies:
-      typescript: 5.8.2
 
   cli-boxes@4.0.1: {}
 

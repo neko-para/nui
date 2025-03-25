@@ -1,12 +1,11 @@
 import { build } from 'esbuild'
 
 build({
-  entryPoints: ['src/index.ts'],
+  entryPoints: ['src/index.tsx'],
   platform: 'node',
   bundle: true,
   sourcemap: true,
   outdir: 'dist',
   format: 'esm',
-  minify: true,
-  external: ['@vue/runtime-core']
+  minify: true
 })
