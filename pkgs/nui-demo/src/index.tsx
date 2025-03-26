@@ -1,4 +1,4 @@
-import { NScreen, createApp, defineComponent, ref, sequence } from '@nekosu/nui'
+import { NScreen, createApp, defineComponent, input, ref, sequence } from '@nekosu/nui'
 
 const counter = ref(1)
 
@@ -36,10 +36,13 @@ const Comp = () => {
   )
 }
 
+const [width, height] = await input.querySize()
+
 const screen = new NScreen()
-screen.resize(80, 25)
+screen.resize(width, height)
 
 sequence.clear()
+sequence.move(0, 0)
+
 const app = createApp(Comp)
 app.mount(screen)
-// screen.scheduleLayout()

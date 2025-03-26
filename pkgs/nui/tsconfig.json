@@ -10,5 +10,5 @@
     "emitDeclarationOnly": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "../nui-demo/src/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
