@@ -29,13 +29,34 @@ export class NInput extends NText {
         }
       } else if (event.key.startsWith('\x1b[')) {
         const seq = event.key.substring(2)
-        // delete
-        if (seq === '3~') {
-          if (this.pos + 1 < this.text.length) {
-            this.updateText(
-              this.text.substring(0, this.pos) + this.text.substring(this.pos + 1, this.text.length)
-            )
-          }
+        switch (seq) {
+          // delete
+          case '3~':
+            if (this.pos < this.text.length) {
+              this.updateText(
+                this.text.substring(0, this.pos) +
+                  this.text.substring(this.pos + 1, this.text.length)
+              )
+            }
+            break
+          // up
+          case 'A':
+            break
+          // down
+          case 'B':
+            break
+          // right
+          case 'C':
+            if (this.pos < this.text.length) {
+              this.pos += 1
+            }
+            break
+          // left
+          case 'D':
+            if (this.pos > 0) {
+              this.pos -= 1
+            }
+            break
         }
       } else {
         if (event.key === '\r') {
