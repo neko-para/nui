@@ -22,7 +22,7 @@ const Comp = () => {
       backgroundFill=" "
       backgroundColor="bright-white"
     >
-      {Array.from({ length: 10 }, (_, idx) => {
+      {/* {Array.from({ length: 10 }, (_, idx) => {
         return (
           <box style="single" backgroundFill=" " borderColor="bright-magenta">
             <text grow={1} color={'blue'}>
@@ -31,7 +31,10 @@ const Comp = () => {
             <VueComp></VueComp>
           </box>
         )
-      })}
+      })} */}
+      <box style="single">
+        <input width={10} height={5} backgroundFill=" "></input>
+      </box>
     </layout>
   )
 }

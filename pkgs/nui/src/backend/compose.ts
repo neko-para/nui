@@ -77,6 +77,8 @@ export class Compose {
   }
 
   render() {
+    sequence.save()
+
     let result = sequence.resetColorSeq() + sequence.clearSeq()
 
     const rows = new Set<number>()
@@ -143,5 +145,7 @@ export class Compose {
     }
 
     process.stdout.write(result)
+
+    sequence.restore()
   }
 }

@@ -1,7 +1,9 @@
+import { env } from 'process'
 import Yoga, { Align, Display, Edge, type Node, PositionType } from 'yoga-layout'
 
 import { Compose } from '../backend/compose'
 import { type KnownColor, sequence } from '../backend/sequence'
+import type { NEvent } from './event'
 import { screen } from './screen'
 import { checkColorNullUndefined, checkNumberPercUndefined } from './validate'
 
@@ -357,6 +359,8 @@ export class NWidget {
     }
   }
 
+  afterLayout() {}
+
   layout() {
     if (!this.node.hasNewLayout()) {
       return
@@ -383,6 +387,8 @@ export class NWidget {
     for (const child of this.childs) {
       child.layout()
     }
+
+    this.afterLayout()
   }
 
   draw(compose: Compose) {
@@ -403,6 +409,26 @@ export class NWidget {
 
     for (const child of this.childs) {
       child.render(compose)
+    }
+  }
+
+  focus() {
+    if (screen) {
+      screen.focusWidget = this
+    }
+  }
+
+  handle(event: NEvent) {
+    event.ignore()
+  }
+
+  dispatchEvent(event: NEvent): boolean {
+    event.accepted = true
+    this.handle(event)
+    if (event.accepted) {
+      return true
+    } else {
+      return this.parent?.dispatchEvent(event) ?? false
     }
   }
 }

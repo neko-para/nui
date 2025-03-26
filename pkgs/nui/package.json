@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nekosu/nui-jsx": "workspace:*",
+    "@nekosu/nui-tsconfig": "workspace:*",
     "@vue/runtime-core": "^3.5.13"
   }
 }

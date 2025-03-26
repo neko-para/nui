@@ -81,9 +81,14 @@ declare namespace JSX {
 
   interface IntrinsicElements {
     layout: BaseElementProps & LayoutElementProps
-    text: BaseElementProps & {
-      children?: TextPrim | TextPrim[]
-    } & NTextProp
+    text: BaseElementProps &
+      NTextProp & {
+        children?: TextPrim | TextPrim[]
+      }
     box: BaseElementProps & LayoutElementProps & NBoxProp
+    input: BaseElementProps &
+      NTextProp & {
+        children?: []
+      }
   }
 }

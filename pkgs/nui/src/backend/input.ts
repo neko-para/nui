@@ -1,3 +1,5 @@
+import { makeEvent } from '../base/event'
+import { screen } from '../base/screen'
 import { sequence } from './sequence'
 
 class Input {
@@ -7,14 +9,19 @@ class Input {
   constructor() {
     this.raw = true
     process.stdin.on('data', chunk => {
-      // ^A ~ ^Z
-      if (chunk.length === 1 && chunk[0] >= 1 && chunk[0] <= 26) {
-        // ^C
-        if (chunk[0] === 3) {
-          process.exit(0)
-        }
+      // ^C
+      if (chunk.length === 1 && chunk[0] === 3) {
+        process.exit(0)
       } else {
-        this.proc(chunk.toString())
+        if (!this.proc(chunk.toString())) {
+          screen?.focusWidget?.dispatchEvent(
+            makeEvent({
+              type: 'key',
+              chunk,
+              key: chunk.toString()
+            })
+          )
+        }
       }
     })
   }
@@ -33,6 +40,9 @@ class Input {
       const rsp = this.queryResp
       this.queryResp = () => void 0
       rsp(data.substring(2, data.length - 1))
+      return true
+    } else {
+      return false
     }
   }
 

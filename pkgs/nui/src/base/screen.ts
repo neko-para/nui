@@ -7,6 +7,8 @@ export class NScreen extends NWidget {
   needsLayout: boolean = false
   needsRender: boolean = false
 
+  focusWidget?: NWidget
+
   constructor() {
     super()
 

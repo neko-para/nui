@@ -7,6 +7,7 @@ import {
 } from '@vue/runtime-core'
 
 import { NBox } from '../base/box'
+import { NInput } from '../base/input'
 import { NLayout } from '../base/layout'
 import { screen } from '../base/screen'
 import { NText } from '../base/text'
@@ -44,6 +45,8 @@ const options: RendererOptions<NWidget, NWidget> = {
         return new NLayout()
       case 'box':
         return new NBox()
+      case 'input':
+        return new NInput()
     }
     return new NWidget()
   },

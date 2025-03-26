@@ -154,4 +154,33 @@ export class NText extends NWidget {
       compose.text(this.bound[0], this.bound[1] + y, sect, this.props.color)
     }
   }
+
+  posAt(pos: number): [x: number, y: number] {
+    const rows = this.text.split('\n')
+    let row: string | undefined = undefined
+
+    for (let y = 0; y < this.bound[3]; y++) {
+      if (row === undefined) {
+        row = rows.shift()
+        pos -= 1
+        if (pos === 0) {
+          return [this.bound[0], this.bound[1] + y]
+        }
+      }
+      if (row === undefined) {
+        break
+      }
+      const sect = row.substring(0, this.bound[2])
+      if (pos <= sect.length) {
+        return [this.bound[0] + pos, this.bound[1] + y]
+      } else {
+        pos -= sect.length
+      }
+      row = row.substring(this.bound[2])
+      if (row.length === 0) {
+        row = undefined
+      }
+    }
+    return [this.bound[0], this.bound[1] + this.bound[3]]
+  }
 }

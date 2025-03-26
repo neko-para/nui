@@ -51,6 +51,18 @@ export const sequence = {
   move(row: number, col: number) {
     process.stdout.write(this.moveSeq(row, col))
   },
+  saveSeq() {
+    return '\x1b7'
+  },
+  save() {
+    process.stdout.write(this.saveSeq())
+  },
+  restoreSeq() {
+    return '\x1b8'
+  },
+  restore() {
+    process.stdout.write(this.restoreSeq())
+  },
 
   resetColorSeq() {
     return `\x1b[0m`

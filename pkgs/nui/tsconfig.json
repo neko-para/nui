@@ -1,11 +1,6 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
+  "extends": "@nekosu/nui-tsconfig/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
-
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist"

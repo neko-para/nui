@@ -17,6 +17,9 @@ importers:
       '@nekosu/nui-jsx':
         specifier: workspace:*
         version: link:../nui-jsx
+      '@nekosu/nui-tsconfig':
+        specifier: workspace:*
+        version: link:../nui-tsconfig
       '@vue/runtime-core':
         specifier: ^3.5.13
         version: 3.5.13
